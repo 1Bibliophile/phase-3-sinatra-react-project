@@ -14,16 +14,18 @@ ActiveRecord::Schema.define(version: 2022_03_31_015333) do
 
   create_table "assets", force: :cascade do |t|
     t.string "name"
-    t.integer "date"
+    t.string "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "subsidiaries", force: :cascade do |t|
     t.string "name"
-    t.integer "date"
+    t.string "date"
+    t.integer "asset_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["asset_id"], name: "index_subsidiaries_on_asset_id"
   end
 
 end
