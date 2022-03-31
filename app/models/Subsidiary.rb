@@ -1,0 +1,3 @@
+class Subsidiary
+
+end
