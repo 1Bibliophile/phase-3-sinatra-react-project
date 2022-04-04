@@ -16,7 +16,7 @@ interacts with the database via the API.
 
 ## Installation
 
-[**Fork and clone**][fork link] this repository to get started. Then, run
+[**Fork and clone**] this repository to get started. Then, run
 `bundle install` to install the gems.
 
 ## Start Server
