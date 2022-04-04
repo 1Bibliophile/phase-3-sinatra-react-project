@@ -17,8 +17,31 @@ task :server do
   exec "bundle exec rerun -b '#{rackup}'"
 end
 
+def reload
+  load_all "./app" if Dir.exists?("./app")
+end
+
 desc "Start the console"
 task :console do
+  puts "Loading the environment..."
+  reload
+
+  puts "Starting the Pry console..."
   ActiveRecord::Base.logger = Logger.new(STDOUT)
   Pry.start
+end
+
+desc "Resets Database"
+task :reset_db do
+  puts "Dropping the database..."
+  system "rm ./db/development.sqlite"
+  system "rm ./db/test.sqlite"
+  system "rm ./db/production.sqlite"
+  system "rm ./db/schema.rb"
+
+  puts "Running Migrations..."
+  system "rake db:migrate"
+  puts "Seeding the database..."
+  system "rake db:seed"
+  puts "Done seeding"
 end
