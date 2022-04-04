@@ -1,4 +1,4 @@
-# Disney Business Model
+# Disney Business Model (backend)
 
 ## Description
 
@@ -30,9 +30,9 @@ $ bundle exec rake server
 This will run the server on port
 [http://localhost:9292](http://localhost:9292).
 
-### Frontend Setup
+### Frontend
 
-Here's a link to the React frontend application:
+Here's a link to the React frontend repo:
 https://github.com/1Bibliophile/my-app-frontend
 
 
