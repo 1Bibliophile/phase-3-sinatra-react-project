@@ -26,12 +26,12 @@ class AssetsController < ApplicationController
 
   # GET: /assets/5
   get "/assets/:id" do
-    asset = Assets.to_json.find_by_id(params["id"])
+    asset = Asset.to_json.find_by_id(params["id"])
   end
 
   # PATCH: /assets/5
   patch "/assets/:id" do
-    asset = Assets.to_json.find_by_id(params["id"])
+    asset = Asset.to_json.find_by_id(params["id"])
     if asset && asset.update(params["id"])
          asset.to_json(include :subsidiaries)
     elsif !asset
@@ -54,6 +54,6 @@ end
 private
 
   def find_asset
-    asset = Assets.find_by_id(params["id"])
+    asset = Asset.find_by_id(params["id"])
   end
 end

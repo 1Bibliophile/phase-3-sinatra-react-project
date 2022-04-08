@@ -1,15 +1,16 @@
+require 'pry'
 class SubsidiariesController < ApplicationController
 
     # GET: /subsidiaries
     get "/subsidiaries" do
-      Subsidiary.all.to_json(include: [assets: {except: [:created_at, :updated_at]}], except: [:created_at, :updated_at])
+      Subsidiary.all.to_json(include: [asset: {except: [:created_at, :updated_at]}], except: [:created_at, :updated_at])
     end
   
     # POST: /subsidiaries
     post "/subsidiaries" do
       @subsidiary = Subsidiary.create(params)
       if @subsidiary.id
-        @subsidiary.to_json(include :assets)
+        @subsidiary.to_json(include: :asset)
       else
         @subsidiary.errors.full_messages.to_sentence
       end
@@ -26,9 +27,10 @@ class SubsidiariesController < ApplicationController
   
     # GET: /subsidiaries/5
     get "/subsidiaries/:id" do
-        sub = Subsidiary.find_by(id: "#{id}")
-        if @subsidiaries
-            
+        find_subsidiary
+        if @subsidiary
+            binding.pry
+            @subsidiary.to_json
         else
             {errors: "Record not found with #{params['id']}"}.to_json
         end
@@ -47,9 +49,9 @@ class SubsidiariesController < ApplicationController
     end
   
     # DELETE: /subsidiaries/5/delete
-    delete "/subsidiaries/:id/delete" do
+    delete "/subsidiaries/:id" do
         
-        if @subsidiaries&.destroy
+        if @subsidiary&.destroy
             {messages: "Record successfully destroyed"}.to_json
         else
             {errors: "Record not found with #{params['id']}"}.to_json
