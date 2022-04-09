@@ -50,7 +50,7 @@ class SubsidiariesController < ApplicationController
   
     # DELETE: /subsidiaries/5/delete
     delete "/subsidiaries/:id" do
-        
+        find_subsidiary
         if @subsidiary&.destroy
             {messages: "Record successfully destroyed"}.to_json
         else
